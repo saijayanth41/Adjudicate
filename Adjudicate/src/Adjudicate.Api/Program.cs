@@ -1,3 +1,4 @@
+using System.Text.Json.Serialization;
 using Adjudicate.Api.Middleware;
 using Adjudicate.Domain.Adjudication;
 using Adjudicate.Domain.Adjudication.Rules;
@@ -23,7 +24,8 @@ builder.Services.AddScoped<IClaimSubmissionService, ClaimSubmissionService>();
 builder.Services.AddScoped<IClaimAdjudicationService, ClaimAdjudicationService>();
 builder.Services.AddScoped<IClaimQueryService, ClaimQueryService>();
 
-builder.Services.AddControllers();
+builder.Services.AddControllers()
+    .AddJsonOptions(o => o.JsonSerializerOptions.Converters.Add(new JsonStringEnumConverter()));
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen(c => c.ExampleFilters());
 builder.Services.AddSwaggerExamplesFromAssemblyOf<Program>();
