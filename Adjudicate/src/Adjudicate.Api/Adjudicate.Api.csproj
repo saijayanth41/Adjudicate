@@ -1,0 +1,12 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <ItemGroup>
+    <PackageReference Include="Swashbuckle.AspNetCore" Version="6.9.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="../Adjudicate.Domain/Adjudicate.Domain.csproj" />
+    <ProjectReference Include="../Adjudicate.Infrastructure/Adjudicate.Infrastructure.csproj" />
+  </ItemGroup>
+
+</Project>

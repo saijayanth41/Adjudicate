@@ -1,0 +1,10 @@
+<Solution>
+  <Folder Name="/src/">
+    <Project Path="src/Adjudicate.Api/Adjudicate.Api.csproj" />
+    <Project Path="src/Adjudicate.Domain/Adjudicate.Domain.csproj" />
+    <Project Path="src/Adjudicate.Infrastructure/Adjudicate.Infrastructure.csproj" />
+  </Folder>
+  <Folder Name="/tests/">
+    <Project Path="tests/Adjudicate.Tests/Adjudicate.Tests.csproj" />
+  </Folder>
+</Solution>

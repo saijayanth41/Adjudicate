@@ -1,0 +1,26 @@
+# Build output
+bin/
+obj/
+
+# Claude Code
+.claude/
+CLAUDE.md
+
+# IDE
+.vs/
+.vscode/
+.idea/
+
+# OS
+.DS_Store
+
+# Test results
+TestResults/
+
+# Logs
+*.log
+
+# NuGet
+packages/
+*.nupkg
+EOF

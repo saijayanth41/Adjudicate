@@ -1,0 +1,7 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <ItemGroup>
+    <ProjectReference Include="../Adjudicate.Domain/Adjudicate.Domain.csproj" />
+  </ItemGroup>
+
+</Project>
