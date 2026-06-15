@@ -28,7 +28,7 @@ public sealed class MsSqlContainerFixture : IAsyncLifetime
     {
         var options = new DbContextOptionsBuilder<AdjudicateDbContext>()
             .UseSqlServer(ConnectionString,
-                sql => sql.MigrationsAssembly(typeof(AdjudicateDbContext).Assembly.FullName))
+                sql => sql.MigrationsAssembly(typeof(AdjudicateDbContext).Assembly.GetName().Name))
             .Options;
 
         return new AdjudicateDbContext(options);

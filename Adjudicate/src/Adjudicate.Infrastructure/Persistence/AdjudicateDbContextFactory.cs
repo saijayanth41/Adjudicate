@@ -10,7 +10,7 @@ public class AdjudicateDbContextFactory : IDesignTimeDbContextFactory<Adjudicate
         var options = new DbContextOptionsBuilder<AdjudicateDbContext>()
             .UseSqlServer(
                 "Server=localhost;Database=AdjudicateDb;Trusted_Connection=True;TrustServerCertificate=True;",
-                sql => sql.MigrationsAssembly(typeof(AdjudicateDbContext).Assembly.FullName))
+                sql => sql.MigrationsAssembly(typeof(AdjudicateDbContext).Assembly.GetName().Name))
             .Options;
 
         return new AdjudicateDbContext(options);

@@ -12,7 +12,7 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddDbContext<AdjudicateDbContext>(options =>
     options.UseSqlServer(
         builder.Configuration.GetConnectionString("DefaultConnection"),
-        sql => sql.MigrationsAssembly(typeof(AdjudicateDbContext).Assembly.FullName)));
+        sql => sql.MigrationsAssembly(typeof(AdjudicateDbContext).Assembly.GetName().Name)));
 
 builder.Services.AddScoped<IAdjudicationRule, MemberEligibilityRule>();
 builder.Services.AddScoped<IAdjudicationRule, PlanCoverageRule>();

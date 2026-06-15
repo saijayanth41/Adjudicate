@@ -34,19 +34,19 @@ public sealed class ExceptionMiddleware
 
     private static Task WriteErrorAsync(HttpContext context, Exception ex)
     {
-        var (status, title) = ex switch
+        var (status, title, detail) = ex switch
         {
-            KeyNotFoundException => (StatusCodes.Status404NotFound, "Not Found"),
-            InvalidOperationException => (StatusCodes.Status409Conflict, "Conflict"),
-            ArgumentException => (StatusCodes.Status400BadRequest, "Bad Request"),
-            _ => (StatusCodes.Status500InternalServerError, "Internal Server Error")
+            KeyNotFoundException => (StatusCodes.Status404NotFound, "Not Found", ex.Message),
+            InvalidOperationException => (StatusCodes.Status409Conflict, "Conflict", ex.Message),
+            ArgumentException => (StatusCodes.Status400BadRequest, "Bad Request", ex.Message),
+            _ => (StatusCodes.Status500InternalServerError, "Internal Server Error", "An unexpected error occurred.")
         };
 
         var problem = new ProblemDetails
         {
             Status = status,
             Title = title,
-            Detail = ex.Message
+            Detail = detail
         };
 
         context.Response.StatusCode = status;

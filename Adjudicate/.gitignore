@@ -26,4 +26,8 @@ packages/
 
 # Generated SQL scripts
 migrations.sql
+
+# Local environment overrides (contain credentials)
+appsettings.Development.json
+appsettings.Local.json
 EOF

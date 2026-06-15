@@ -208,13 +208,19 @@ dotnet build
 dotnet test
 
 # Run the API
-cd src/Adjudicate.Api
-dotnet run
+dotnet run --project src/Adjudicate.Api
 ```
 
-The API starts on `https://localhost:5001`. Swagger UI is available at `https://localhost:5001/swagger`.
+The API starts on `http://localhost:5000`. Swagger UI is available at `http://localhost:5000/swagger`.
 
-> **Connection string:** update `src/Adjudicate.Api/appsettings.json` with your SQL Server instance before running the API. Integration tests manage their own containerized database automatically.
+> **Connection string:** the connection string is intentionally blank in `appsettings.json`. Set it via environment variable before running the API:
+>
+> ```bash
+> export ConnectionStrings__DefaultConnection="Server=127.0.0.1,1433;Database=AdjudicateDb;User Id=sa;Password=<your_password>;Encrypt=False;"
+> dotnet run --project src/Adjudicate.Api
+> ```
+>
+> Integration tests manage their own containerized database via Testcontainers — no connection string configuration required for running tests.
 
 ---
 
