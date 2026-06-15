@@ -23,4 +23,7 @@ TestResults/
 # NuGet
 packages/
 *.nupkg
+
+# Generated SQL scripts
+migrations.sql
 EOF
