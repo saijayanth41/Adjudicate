@@ -11,23 +11,26 @@ using Xunit;
 namespace Adjudicate.Tests.Api;
 
 [Collection(SqlServerCollection.Name)]
-public class ClaimsControllerTests
+public class ClaimsControllerTests : IDisposable
 {
     private static readonly DateOnly ServiceDate = new(2024, 6, 15);
     private static readonly DateOnly Dob = new(1985, 1, 1);
     private static readonly DateOnly ActiveFrom = new(2024, 1, 1);
 
     private readonly MsSqlContainerFixture _fixture;
+    private readonly AdjudicateApiFactory _factory;
 
     public ClaimsControllerTests(MsSqlContainerFixture fixture)
     {
         _fixture = fixture;
+        _factory = new AdjudicateApiFactory(fixture.ConnectionString);
     }
+
+    public void Dispose() => _factory.Dispose();
 
     private AdjudicateDbContext CreateDb() => _fixture.CreateDb();
 
-    private HttpClient CreateClient() =>
-        new AdjudicateApiFactory(_fixture.ConnectionString).CreateClient();
+    private HttpClient CreateClient() => _factory.CreateClient();
 
     private static string Code() => Guid.NewGuid().ToString("N")[..8].ToUpper();
 

@@ -19,7 +19,7 @@ public sealed class ClaimAdjudicationService : IClaimAdjudicationService
 
     public async Task<AdjudicationOutcome> AdjudicateAsync(Guid claimId, CancellationToken ct = default)
     {
-        await using var tx = await _db.Database.BeginTransactionAsync(ct);
+        await using var tx = await _db.Database.BeginTransactionAsync(System.Data.IsolationLevel.Serializable, ct);
 
         var claim = await _db.Claims
             .Include(c => c.Lines)
@@ -45,7 +45,8 @@ public sealed class ClaimAdjudicationService : IClaimAdjudicationService
         var existingRaw = await _db.Claims
             .Where(c => c.MemberId == claim.MemberId
                 && c.Id != claimId
-                && c.Status != ClaimStatus.Void)
+                && c.Status != ClaimStatus.Void
+                && c.Status != ClaimStatus.Denied)
             .Select(c => new
             {
                 c.MemberId,

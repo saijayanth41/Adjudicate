@@ -22,6 +22,12 @@ public class ClaimConfiguration : IEntityTypeConfiguration<Claim>
         builder.Ignore(c => c.TotalBilledAmount);
 
         builder.HasIndex(c => c.ClaimNumber).IsUnique();
+        builder.HasIndex(c => c.MemberId);
+
+        builder.HasOne<Member>()
+            .WithMany()
+            .HasForeignKey(c => c.MemberId)
+            .OnDelete(DeleteBehavior.Restrict);
 
         builder.HasMany(c => c.Lines)
             .WithOne()

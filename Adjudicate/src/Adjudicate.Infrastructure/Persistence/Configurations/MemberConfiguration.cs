@@ -23,5 +23,10 @@ public class MemberConfiguration : IEntityTypeConfiguration<Member>
             .HasMaxLength(100);
 
         builder.HasIndex(m => m.MemberNumber).IsUnique();
+
+        builder.HasOne<Plan>()
+            .WithMany()
+            .HasForeignKey(m => m.PlanId)
+            .OnDelete(DeleteBehavior.Restrict);
     }
 }

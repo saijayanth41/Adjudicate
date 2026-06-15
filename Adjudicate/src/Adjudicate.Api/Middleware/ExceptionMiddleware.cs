@@ -5,6 +5,11 @@ namespace Adjudicate.Api.Middleware;
 
 public sealed class ExceptionMiddleware
 {
+    private static readonly JsonSerializerOptions JsonOptions = new()
+    {
+        PropertyNamingPolicy = JsonNamingPolicy.CamelCase
+    };
+
     private readonly RequestDelegate _next;
     private readonly ILogger<ExceptionMiddleware> _logger;
 
@@ -47,6 +52,6 @@ public sealed class ExceptionMiddleware
         context.Response.StatusCode = status;
         context.Response.ContentType = "application/problem+json";
 
-        return context.Response.WriteAsync(JsonSerializer.Serialize(problem));
+        return context.Response.WriteAsync(JsonSerializer.Serialize(problem, JsonOptions));
     }
 }

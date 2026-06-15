@@ -1,6 +1,8 @@
+using System.ComponentModel.DataAnnotations;
+
 namespace Adjudicate.Api.DTOs;
 
 public record SubmitClaimRequest(
-    string MemberNumber,
+    [Required][StringLength(50, MinimumLength = 1)] string MemberNumber,
     DateOnly ServiceDate,
-    IReadOnlyList<ClaimLineRequest> Lines);
+    [Required][MinLength(1)] IReadOnlyList<ClaimLineRequest> Lines);
